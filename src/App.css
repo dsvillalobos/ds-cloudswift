@@ -1,42 +1,88 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  background-color: #fbfaff !important;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.serif {
+  font-family: serif !important;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.bg-primary,
+.carousel-indicators button {
+  background-color: #4f518c !important;
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: #4f518c !important;
+  border: 1px solid #4f518c !important;
+}
+
+.btn-secondary {
+  color: #fff !important;
+  background-color: #8187dc !important;
+  border: 1px solid #8187dc !important;
+}
+
+.btn-info {
+  color: #fff !important;
+  background-color: #cfc8e9 !important;
+  border: 1px solid #cfc8e9 !important;
+}
+
+.btn-danger {
+  color: #fff !important;
+  background-color: #c54d4b !important;
+  border: 1px solid #c54d4b !important;
+}
+
+.view-cover img {
+  width: 300px !important;
+  height: auto !important;
+}
+
+.chart-container {
+  height: 300px !important;
+  width: auto !important;
+}
+
+/*iPad*/
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .view-cover img {
+    width: 300px !important;
+    height: auto !important;
   }
-  to {
-    transform: rotate(360deg);
+
+  .chart-container {
+    height: 325px !important;
+    width: auto !important;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/*PCs and Laptops*/
+@media only screen and (min-width: 1025px) {
+  .view-cover img {
+    width: 275px !important;
+    height: auto !important;
+  }
+
+  .chart-container {
+    height: 325px !important;
+    width: auto !important;
   }
 }
 
-.card {
-  padding: 2em;
+.navbar button,
+.form-control,
+.form-control:active,
+.btn-close {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.read-the-docs {
-  color: #888;
+.accordion-button,
+.accordion-button:active,
+.accordion-button:hover {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #fff !important;
 }

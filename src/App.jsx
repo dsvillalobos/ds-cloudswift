@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SignIn from "./views/auth/SignIn";
+import SignUp from "./views/auth/SignUp";
+import Home from "./views/Home";
+import About from "./views/About";
+import Files from "./views/files/Files";
+import AddFile from "./views/files/AddFile";
+import Links from "./views/links/Links";
+import AddLink from "./views/links/AddLink";
+import EditLink from "./views/links/EditLink";
+import Notes from "./views/notes/Notes";
+import AddNote from "./views/notes/AddNote";
+import EditNote from "./views/notes/EditNote";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignIn></SignIn>}></Route>
+        <Route path="/sign-up" element={<SignUp></SignUp>}></Route>
+        <Route path="/home" element={<Home></Home>}></Route>
+        <Route path="/about" element={<About></About>}></Route>
+        <Route path="/files" element={<Files></Files>}></Route>
+        <Route path="/add-file" element={<AddFile></AddFile>}></Route>
+        <Route path="/links" element={<Links></Links>}></Route>
+        <Route path="/add-link" element={<AddLink></AddLink>}></Route>
+        <Route
+          path="/edit-link/:linkId"
+          element={<EditLink></EditLink>}
+        ></Route>
+        <Route path="/notes" element={<Notes></Notes>}></Route>
+        <Route path="/add-note" element={<AddNote></AddNote>}></Route>
+        <Route
+          path="/edit-note/:noteId"
+          element={<EditNote></EditNote>}
+        ></Route>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
