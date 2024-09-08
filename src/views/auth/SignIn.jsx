@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthHeader from "../../components/AuthHeader";
 import ViewCover from "../../components/ViewCover";
 import signInImage from "../../assets/images/sign-in.webp";
+import ErrorAlert from "../../components/ErrorAlert";
 import axios from "axios";
 
 function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
@@ -33,17 +36,20 @@ function SignIn() {
       setEmail("");
       setPassword("");
 
-      if (response.data != false) {
+      if (response.data != null) {
         sessionStorage.setItem("UserID", response.data.UserID);
         sessionStorage.setItem(
           "Username",
           response.data.Name + " " + response.data.LastName
         );
         navigate("/home");
+      } else {
+        setMessage("Wrong email or password. Try again.");
+        setShowErrorAlert(true);
       }
-      console.log(response.data);
     } catch (err) {
-      console.log(err);
+      setMessage("DS CloudSwift Sign In failed. Please try again.");
+      setShowErrorAlert(true);
     }
   }
 
@@ -57,11 +63,11 @@ function SignIn() {
             viewImage={signInImage}
             viewDescription="Get started swiftly! Sign in to access your files, links, and notes securely."
           ></ViewCover>
+          <div className="alert-container mx-3">
+            {showErrorAlert && <ErrorAlert message={message}></ErrorAlert>}
+          </div>
           <form className="mx-3" autoComplete="off" onSubmit={handleFormSubmit}>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email:
-              </label>
+            <div className="mb-3 form-floating">
               <input
                 type="email"
                 name="email"
@@ -71,12 +77,13 @@ function SignIn() {
                 value={email}
                 required
                 maxLength="255"
+                placeholder="Email:"
               />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password:
+              <label htmlFor="email" className="form-label">
+                Email:
               </label>
+            </div>
+            <div className="mb-3 form-floating">
               <input
                 type="password"
                 name="password"
@@ -86,10 +93,14 @@ function SignIn() {
                 value={password}
                 required
                 maxLength="255"
+                placeholder="Password:"
               />
+              <label htmlFor="password" className="form-label">
+                Password:
+              </label>
             </div>
             <div className="mb-3 d-grid gap-2">
-              <button className="btn btn-primary">Sign In</button>
+              <button className="btn btn-primary btn-sm">Sign In</button>
             </div>
             <div className="mb-3 text-center small">
               Don't have an account yet?{" "}

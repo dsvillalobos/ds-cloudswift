@@ -11,7 +11,8 @@ body {
   background-color: #4f518c !important;
 }
 
-.btn-primary {
+.btn-primary,
+.table-primary {
   color: #fff !important;
   background-color: #4f518c !important;
   border: 1px solid #4f518c !important;
@@ -25,8 +26,8 @@ body {
 
 .btn-info {
   color: #fff !important;
-  background-color: #cfc8e9 !important;
-  border: 1px solid #cfc8e9 !important;
+  background-color: #b7a5cc !important;
+  border: 1px solid #b7a5cc !important;
 }
 
 .btn-danger {
@@ -85,4 +86,15 @@ body {
   outline: none !important;
   box-shadow: none !important;
   background-color: #fff !important;
+}
+
+.cloudswift-ai-chat-container {
+  height: 350px !important;
+  overflow-y: auto !important;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.cloudswift-ai-chat-container::-webkit-scrollbar {
+  display: none !important;
 }

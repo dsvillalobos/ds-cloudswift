@@ -26,8 +26,8 @@ function Notes() {
       const response = await axios.get(
         `http://192.168.1.15/ds-cloudswift-rest/api/notes.php/get-notes/${userId}`
       );
+
       setNotes(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -38,8 +38,8 @@ function Notes() {
       const response = await axios.delete(
         `http://192.168.1.15/ds-cloudswift-rest/api/notes.php/${noteId}`
       );
+
       fetchNotes();
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }

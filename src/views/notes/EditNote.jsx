@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import ViewCover from "../../components/ViewCover";
 import editNoteImage from "../../assets/images/edit-note.webp";
+import SuccessAlert from "../../components/SuccessAlert";
+import ErrorAlert from "../../components/ErrorAlert";
 import axios from "axios";
 
 function EditNote() {
@@ -11,6 +13,9 @@ function EditNote() {
   const { noteId } = useParams();
   const [noteTitle, setNoteTitle] = useState("");
   const [noteBody, setNoteBody] = useState("");
+  const [message, setMessage] = useState("");
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   useEffect(
     function () {
@@ -28,6 +33,7 @@ function EditNote() {
       const response = await axios.get(
         `http://192.168.1.15/ds-cloudswift-rest/api/notes.php/get-note/${noteId}`
       );
+
       setNoteTitle(response.data.NoteTitle);
       setNoteBody(response.data.NoteBody);
     } catch (err) {
@@ -54,9 +60,14 @@ function EditNote() {
         "http://192.168.1.15/ds-cloudswift-rest/api/notes.php",
         { noteId, noteTitle, noteBody }
       );
-      console.log(response.data);
+
+      setMessage("The note has been edited successfully.");
+      setShowSuccessAlert(true);
+      setShowErrorAlert(false);
     } catch (err) {
-      console.log(err);
+      setMessage("DS CloudSwift couldn't edit the note.");
+      setShowErrorAlert(true);
+      setShowSuccessAlert(false);
     }
   }
 
@@ -70,11 +81,14 @@ function EditNote() {
             viewImage={editNoteImage}
             viewDescription="Edit your notes effortlessly to keep your thoughts organized and refined."
           ></ViewCover>
+          <div className="alert-container mx-3">
+            {showSuccessAlert && (
+              <SuccessAlert message={message}></SuccessAlert>
+            )}
+            {showErrorAlert && <ErrorAlert message={message}></ErrorAlert>}
+          </div>
           <form className="mx-3" autoComplete="off" onSubmit={handleFormSubmit}>
-            <div className="mb-3">
-              <label htmlFor="noteTitle" className="form-label">
-                Note Title:
-              </label>
+            <div className="mb-3 form-floating">
               <input
                 type="text"
                 name="noteTitle"
@@ -84,12 +98,13 @@ function EditNote() {
                 value={noteTitle}
                 required
                 maxLength="255"
+                placeholder="Note Title:"
               />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="noteBody" className="form-label">
-                Note Body:
+              <label htmlFor="noteTitle" className="form-label">
+                Note Title:
               </label>
+            </div>
+            <div className="mb-3 form-floating">
               <textarea
                 rows="5"
                 name="noteBody"
@@ -98,7 +113,11 @@ function EditNote() {
                 onChange={handleNoteBodyChange}
                 value={noteBody}
                 required
+                placeholder="Note Body:"
               ></textarea>
+              <label htmlFor="noteBody" className="form-label">
+                Note Body:
+              </label>
             </div>
             <div className="mb-3 d-grid gap-2">
               <button className="btn btn-primary btn-sm">Edit Note</button>

@@ -26,8 +26,8 @@ function Files() {
       const response = await axios.get(
         `http://192.168.1.15/ds-cloudswift-rest/api/files.php/get-files/${userId}`
       );
+
       setFiles(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -41,7 +41,7 @@ function Files() {
           responseType: "blob",
         }
       );
-      console.log(response.data);
+
       const fileUrl = window.URL.createObjectURL(new Blob([response.data]));
       const fileDownloadLink = document.createElement("a");
       fileDownloadLink.href = fileUrl;
@@ -61,8 +61,8 @@ function Files() {
       const response = await axios.delete(
         `http://192.168.1.15/ds-cloudswift-rest/api/files.php/${fileId}`
       );
+
       fetchFiles();
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }

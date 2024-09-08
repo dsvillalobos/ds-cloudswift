@@ -26,8 +26,8 @@ function Links() {
       const response = await axios.get(
         `http://192.168.1.15/ds-cloudswift-rest/api/links.php/get-links/${userId}`
       );
+
       setLinks(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -38,8 +38,8 @@ function Links() {
       const response = await axios.delete(
         `http://192.168.1.15/ds-cloudswift-rest/api/links.php/${linkId}`
       );
+
       fetchLinks();
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }

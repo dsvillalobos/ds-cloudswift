@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import AuthHeader from "../../components/AuthHeader";
 import ViewCover from "../../components/ViewCover";
 import signUpImage from "../../assets/images/sign-up.webp";
+import SuccessAlert from "../../components/SuccessAlert";
+import ErrorAlert from "../../components/ErrorAlert";
 import axios from "axios";
 
 function SignUp() {
@@ -10,6 +12,9 @@ function SignUp() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -38,13 +43,41 @@ function SignUp() {
         "http://192.168.1.15/ds-cloudswift-rest/api/auth.php/sign-up",
         { name, lastName, email, password }
       );
+
       setName("");
       setLastName("");
       setEmail("");
       setPassword("");
-      console.log(response.data);
+
+      if (response.data[0] == "E") {
+        setMessage(
+          <>
+            That email address is already taken. Try to{" "}
+            <a className="alert-link" href="/">
+              Sign In
+            </a>
+            .
+          </>
+        );
+        setShowErrorAlert(true);
+        setShowSuccessAlert(false);
+      } else {
+        setMessage(
+          <>
+            Please proceed to{" "}
+            <a className="alert-link" href="/">
+              Sign In
+            </a>
+            .
+          </>
+        );
+        setShowSuccessAlert(true);
+        setShowErrorAlert(false);
+      }
     } catch (err) {
-      console.log(err);
+      setMessage("DS CloudSwift Sign Up failed. Please try again.");
+      setShowErrorAlert(true);
+      setShowSuccessAlert(false);
     }
   }
 
@@ -58,11 +91,14 @@ function SignUp() {
             viewImage={signUpImage}
             viewDescription="Join DS CloudSwift and unlock seamless file, link, and note management."
           ></ViewCover>
+          <div className="alert-container mx-3">
+            {showSuccessAlert && (
+              <SuccessAlert message={message}></SuccessAlert>
+            )}
+            {showErrorAlert && <ErrorAlert message={message}></ErrorAlert>}
+          </div>
           <form className="mx-3" autoComplete="off" onSubmit={handleFormSubmit}>
-            <div className="mb-3">
-              <label htmlFor="name" className="form-label">
-                Name:
-              </label>
+            <div className="mb-3 form-floating">
               <input
                 type="text"
                 name="name"
@@ -74,12 +110,13 @@ function SignUp() {
                 maxLength="255"
                 pattern="^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$"
                 title="Please enter a valid name (letters only, no numbers or special characters)"
+                placeholder="Name:"
               />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="lastName" className="form-label">
-                Last Name:
+              <label htmlFor="name" className="form-label">
+                Name:
               </label>
+            </div>
+            <div className="mb-3 form-floating">
               <input
                 type="text"
                 name="lastName"
@@ -91,12 +128,13 @@ function SignUp() {
                 maxLength="255"
                 pattern="^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$"
                 title="Please enter a valid last name (letters only, no numbers or special characters)"
+                placeholder="Last Name:"
               />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email:
+              <label htmlFor="lastName" className="form-label">
+                Last Name:
               </label>
+            </div>
+            <div className="mb-3 form-floating">
               <input
                 type="email"
                 name="email"
@@ -106,12 +144,13 @@ function SignUp() {
                 value={email}
                 required
                 maxLength="255"
+                placeholder="Email:"
               />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password:
+              <label htmlFor="email" className="form-label">
+                Email:
               </label>
+            </div>
+            <div className="mb-3 form-floating">
               <input
                 type="password"
                 name="password"
@@ -123,10 +162,14 @@ function SignUp() {
                 maxLength="255"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Password must contain at least one number, one uppercase letter, one lowercase letter, and be at least 8 characters long"
+                placeholder="Password:"
               />
+              <label htmlFor="password" className="form-label">
+                Password:
+              </label>
             </div>
             <div className="mb-3 d-grid gap-2">
-              <button className="btn btn-primary">Sign Up</button>
+              <button className="btn btn-primary btn-sm">Sign Up</button>
             </div>
             <div className="mb-3 text-center small">
               Already have an account?{" "}
