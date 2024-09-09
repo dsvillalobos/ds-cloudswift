@@ -89,7 +89,7 @@ body {
 }
 
 .cloudswift-ai-chat-container {
-  height: 350px !important;
+  max-height: 350px !important;
   overflow-y: auto !important;
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
