@@ -40,7 +40,7 @@ function SignUp() {
   async function signUp() {
     try {
       const response = await axios.post(
-        "http://192.168.1.15/ds-cloudswift-rest/api/auth.php/sign-up",
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}auth.php/sign-up`,
         { name, lastName, email, password }
       );
 

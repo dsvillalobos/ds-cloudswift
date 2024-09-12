@@ -52,7 +52,9 @@ function Home() {
   async function getStorageInfo() {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/dashboard.php/get-storage-info/${userId}`
+        `${
+          import.meta.env.VITE_DS_CLOUDSWIFT_API_URL
+        }dashboard.php/get-storage-info/${userId}`
       );
 
       setFiles(response.data[0].Files);
@@ -66,7 +68,9 @@ function Home() {
   async function getRecentActivityInfo() {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/dashboard.php/get-recent-activity-info/${userId}`
+        `${
+          import.meta.env.VITE_DS_CLOUDSWIFT_API_URL
+        }dashboard.php/get-recent-activity-info/${userId}`
       );
 
       setLastFile(response.data[0]);
@@ -82,7 +86,7 @@ function Home() {
     datasets: [
       {
         data: [files, links, notes],
-        backgroundColor: ["#4f518c", "#8187dc", "#b7a5cc"],
+        backgroundColor: ["#4f518c", "#837bac", "#b7a5cc"],
       },
     ],
   };

@@ -24,7 +24,9 @@ function Files() {
   async function fetchFiles() {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/files.php/get-files/${userId}`
+        `${
+          import.meta.env.VITE_DS_CLOUDSWIFT_API_URL
+        }files.php/get-files/${userId}`
       );
 
       setFiles(response.data);
@@ -36,7 +38,9 @@ function Files() {
   async function handleFileDownload(file) {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/files.php/download-file/${file.FileID}`,
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}files.php/download-file/${
+          file.FileID
+        }`,
         {
           responseType: "blob",
         }
@@ -59,7 +63,7 @@ function Files() {
   async function deleteFile(fileId) {
     try {
       const response = await axios.delete(
-        `http://192.168.1.15/ds-cloudswift-rest/api/files.php/${fileId}`
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}files.php/${fileId}`
       );
 
       fetchFiles();

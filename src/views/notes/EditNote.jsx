@@ -31,7 +31,9 @@ function EditNote() {
   async function fetchNote() {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/notes.php/get-note/${noteId}`
+        `${
+          import.meta.env.VITE_DS_CLOUDSWIFT_API_URL
+        }notes.php/get-note/${noteId}`
       );
 
       setNoteTitle(response.data.NoteTitle);
@@ -57,7 +59,7 @@ function EditNote() {
   async function editNote() {
     try {
       const response = await axios.put(
-        "http://192.168.1.15/ds-cloudswift-rest/api/notes.php",
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}notes.php`,
         { noteId, noteTitle, noteBody }
       );
 

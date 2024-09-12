@@ -24,7 +24,9 @@ function Notes() {
   async function fetchNotes() {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/notes.php/get-notes/${userId}`
+        `${
+          import.meta.env.VITE_DS_CLOUDSWIFT_API_URL
+        }notes.php/get-notes/${userId}`
       );
 
       setNotes(response.data);
@@ -36,7 +38,7 @@ function Notes() {
   async function deleteNote(noteId) {
     try {
       const response = await axios.delete(
-        `http://192.168.1.15/ds-cloudswift-rest/api/notes.php/${noteId}`
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}notes.php/${noteId}`
       );
 
       fetchNotes();

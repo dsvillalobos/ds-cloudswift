@@ -41,7 +41,7 @@ function AddNote() {
   async function addNote() {
     try {
       const response = await axios.post(
-        "http://192.168.1.15/ds-cloudswift-rest/api/notes.php",
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}notes.php`,
         { noteTitle, noteBody, userId }
       );
 

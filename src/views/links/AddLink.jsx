@@ -41,7 +41,7 @@ function AddLink() {
   async function addLink() {
     try {
       const response = await axios.post(
-        "http://192.168.1.15/ds-cloudswift-rest/api/links.php",
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}links.php`,
         { linkName, linkAddress, userId }
       );
 

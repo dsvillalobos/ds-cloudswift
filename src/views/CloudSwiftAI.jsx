@@ -83,7 +83,7 @@ function CloudSwiftAI() {
             viewImage={cloudSwiftAIImage}
             viewDescription={
               <>
-                Hello <span className="fw-bold">{username}</span>, How can I
+                Hello <span className="fw-bold">{username}</span>, how can I
                 help you today?
               </>
             }

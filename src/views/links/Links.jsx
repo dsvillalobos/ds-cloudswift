@@ -24,7 +24,9 @@ function Links() {
   async function fetchLinks() {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/links.php/get-links/${userId}`
+        `${
+          import.meta.env.VITE_DS_CLOUDSWIFT_API_URL
+        }links.php/get-links/${userId}`
       );
 
       setLinks(response.data);
@@ -36,7 +38,7 @@ function Links() {
   async function deleteLink(linkId) {
     try {
       const response = await axios.delete(
-        `http://192.168.1.15/ds-cloudswift-rest/api/links.php/${linkId}`
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}links.php/${linkId}`
       );
 
       fetchLinks();

@@ -31,7 +31,9 @@ function EditLink() {
   async function fetchLink() {
     try {
       const response = await axios.get(
-        `http://192.168.1.15/ds-cloudswift-rest/api/links.php/get-link/${linkId}`
+        `${
+          import.meta.env.VITE_DS_CLOUDSWIFT_API_URL
+        }links.php/get-link/${linkId}`
       );
 
       setLinkName(response.data.LinkName);
@@ -57,7 +59,7 @@ function EditLink() {
   async function editLink() {
     try {
       const response = await axios.put(
-        "http://192.168.1.15/ds-cloudswift-rest/api/links.php",
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}links.php`,
         { linkId, linkName, linkAddress }
       );
 

@@ -42,7 +42,7 @@ function AddFile() {
   async function addFile() {
     try {
       const response = await axios.post(
-        "http://192.168.1.15/ds-cloudswift-rest/api/files.php",
+        `${import.meta.env.VITE_DS_CLOUDSWIFT_API_URL}files.php`,
         { fileName, file, userId },
         {
           headers: {
