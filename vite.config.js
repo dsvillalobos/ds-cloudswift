@@ -77,6 +77,14 @@ export default defineConfig({
           },
         ],
       },
+      workbox: {
+        globPatterns: [
+          "assets/*.webp",
+          "assets/*.js",
+          "assets/*.css",
+          "*.html",
+        ],
+      },
     }),
   ],
 });
