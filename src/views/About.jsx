@@ -32,7 +32,7 @@ function About() {
               <span className="fw-bold">Created by</span> @dsvillalobos
             </li>
             <li className="list-group-item">
-              <span className="fw-bold">Version</span> 2.0.8
+              <span className="fw-bold">Version</span> 2.0.9
             </li>
             <li className="list-group-item">
               <span className="fw-bold">Help & Privacy</span>
