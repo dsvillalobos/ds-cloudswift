@@ -36,6 +36,7 @@ function Home() {
   const [lastFile, setLastFile] = useState(null);
   const [lastLink, setLastLink] = useState(null);
   const [lastNote, setLastNote] = useState(null);
+  const [finishedLoading, setFinishedLoading] = useState(false);
 
   useEffect(
     function () {
@@ -76,6 +77,8 @@ function Home() {
       setLastFile(response.data[0]);
       setLastLink(response.data[1]);
       setLastNote(response.data[2]);
+
+      setFinishedLoading(true);
     } catch (err) {
       console.log(err);
     }
@@ -136,97 +139,104 @@ function Home() {
               <div className="small">{notes}</div>
             </div>
           </div>
-          {(lastFile || lastLink || lastNote) && (
+          {finishedLoading && (
             <>
-              <div className="mx-3">
-                <h6 className="mb-2 text-center serif fw-bold">
-                  Storage Charts
-                </h6>
-                <div
-                  id="carouselExampleIndicators"
-                  className="carousel slide"
-                  data-bs-interval="5000"
-                  data-bs-touch="true"
-                  data-bs-ride="carousel"
-                >
-                  <div className="carousel-indicators">
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleIndicators"
-                      data-bs-slide-to="0"
-                      className="active"
-                      aria-current="true"
-                      aria-label="Slide 1"
-                    ></button>
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleIndicators"
-                      data-bs-slide-to="1"
-                      aria-label="Slide 2"
-                    ></button>
-                  </div>
-                  <div className="carousel-inner">
-                    <div className="carousel-item active mb-5">
-                      <div className="chart-container">
-                        <Bar data={chartData} options={barChartOptions}></Bar>
+              {(lastFile || lastLink || lastNote) && (
+                <>
+                  <div className="mx-3">
+                    <h6 className="mb-2 text-center serif fw-bold">
+                      Storage Charts
+                    </h6>
+                    <div
+                      id="carouselExampleIndicators"
+                      className="carousel slide"
+                      data-bs-interval="5000"
+                      data-bs-touch="true"
+                      data-bs-ride="carousel"
+                    >
+                      <div className="carousel-indicators">
+                        <button
+                          type="button"
+                          data-bs-target="#carouselExampleIndicators"
+                          data-bs-slide-to="0"
+                          className="active"
+                          aria-current="true"
+                          aria-label="Slide 1"
+                        ></button>
+                        <button
+                          type="button"
+                          data-bs-target="#carouselExampleIndicators"
+                          data-bs-slide-to="1"
+                          aria-label="Slide 2"
+                        ></button>
+                      </div>
+                      <div className="carousel-inner">
+                        <div className="carousel-item active mb-5">
+                          <div className="chart-container">
+                            <Bar
+                              data={chartData}
+                              options={barChartOptions}
+                            ></Bar>
+                          </div>
+                        </div>
+                        <div className="carousel-item mb-5">
+                          <div className="chart-container">
+                            <Doughnut
+                              data={chartData}
+                              options={doughnutChartOptions}
+                            ></Doughnut>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="carousel-item mb-5">
-                      <div className="chart-container">
-                        <Doughnut
-                          data={chartData}
-                          options={doughnutChartOptions}
-                        ></Doughnut>
-                      </div>
-                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="mx-3">
-                <h6 className="mb-2 pb-2 text-center serif fw-bold">
-                  Recent Activity
-                </h6>
-                <table className="table small">
-                  <thead>
-                    <tr>
-                      <th className="table-primary">Name</th>
-                      <th className="table-primary">Date</th>
-                      <th className="table-primary">Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {lastFile && (
-                      <tr>
-                        <td className="small">{lastFile.FileName}</td>
-                        <td className="small">{lastFile.Date}</td>
-                        <td className="small">{lastFile.Time}</td>
-                      </tr>
-                    )}
-                    {lastLink && (
-                      <tr>
-                        <td className="small">{lastLink.LinkName}</td>
-                        <td className="small">{lastLink.Date}</td>
-                        <td className="small">{lastLink.Time}</td>
-                      </tr>
-                    )}
-                    {lastNote && (
-                      <tr>
-                        <td className="small">{lastNote.NoteTitle}</td>
-                        <td className="small">{lastNote.Date}</td>
-                        <td className="small">{lastNote.Time}</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+                  <div className="mx-3">
+                    <h6 className="mb-2 pb-2 text-center serif fw-bold">
+                      Recent Activity
+                    </h6>
+                    <table className="table small">
+                      <thead>
+                        <tr>
+                          <th className="table-primary">Name</th>
+                          <th className="table-primary">Date</th>
+                          <th className="table-primary">Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {lastFile && (
+                          <tr>
+                            <td className="small">{lastFile.FileName}</td>
+                            <td className="small">{lastFile.Date}</td>
+                            <td className="small">{lastFile.Time}</td>
+                          </tr>
+                        )}
+                        {lastLink && (
+                          <tr>
+                            <td className="small">{lastLink.LinkName}</td>
+                            <td className="small">{lastLink.Date}</td>
+                            <td className="small">{lastLink.Time}</td>
+                          </tr>
+                        )}
+                        {lastNote && (
+                          <tr>
+                            <td className="small">{lastNote.NoteTitle}</td>
+                            <td className="small">{lastNote.Date}</td>
+                            <td className="small">{lastNote.Time}</td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </>
+              )}
+              {!lastFile && !lastLink && !lastNote && (
+                <ViewCover
+                  viewName="Add your Stuff"
+                  viewImage={emptyStateImage}
+                  viewDescription="Get started by adding your first file, link or note."
+                ></ViewCover>
+              )}
             </>
-          )}
-          {!lastFile && !lastLink && !lastNote && (
-            <ViewCover
-              viewName="Add your Stuff"
-              viewImage={emptyStateImage}
-              viewDescription="Get started by adding your first file, link or note."
-            ></ViewCover>
           )}
         </div>
       </main>
