@@ -42,11 +42,6 @@ body {
   border: 1px solid #c54d4b !important;
 }
 
-.view-cover img {
-  width: 300px !important;
-  height: auto !important;
-}
-
 .chart-container {
   height: 300px !important;
   width: auto !important;
@@ -54,11 +49,6 @@ body {
 
 /*iPad*/
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
-  .view-cover img {
-    width: 300px !important;
-    height: auto !important;
-  }
-
   .chart-container {
     height: 325px !important;
     width: auto !important;
@@ -67,11 +57,6 @@ body {
 
 /*PCs and Laptops*/
 @media only screen and (min-width: 1025px) {
-  .view-cover img {
-    width: 275px !important;
-    height: auto !important;
-  }
-
   .chart-container {
     height: 325px !important;
     width: auto !important;

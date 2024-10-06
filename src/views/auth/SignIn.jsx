@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthHeader from "../../components/AuthHeader";
 import ViewCover from "../../components/ViewCover";
-import signInImage from "../../assets/images/sign-in.webp";
+import signInImage from "../../assets/images/sign-in.svg";
 import ErrorAlert from "../../components/ErrorAlert";
 import axios from "axios";
 

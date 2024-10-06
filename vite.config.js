@@ -80,6 +80,7 @@ export default defineConfig({
       workbox: {
         globPatterns: [
           "assets/*.webp",
+          "assets/*.svg",
           "assets/*.js",
           "assets/*.css",
           "icons/*.svg",
