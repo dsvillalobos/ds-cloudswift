@@ -22,8 +22,7 @@ DS CloudSwift is your ultimate companion for easy, fast, and reliable cloud stor
 ### Release Notes
 
 - Enhanced Performance.
-- TEST FEATURE: Download File.
 
-###### DS CloudSwift | Version 2.0.12
+###### DS CloudSwift | Version 2.0.13
 
 See also: [DS CloudSwift - RESTful Web Service](https://github.com/dsvillalobos/ds-cloudswift-rest)
