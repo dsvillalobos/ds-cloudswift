@@ -46,6 +46,7 @@ function Files() {
         }
       );
 
+      /*
       const fileUrl = window.URL.createObjectURL(new Blob([response.data]));
       const fileDownloadLink = document.createElement("a");
       fileDownloadLink.href = fileUrl;
@@ -53,6 +54,13 @@ function Files() {
         "download",
         file.FileName + "." + file.FileType
       );
+      document.body.appendChild(fileDownloadLink);
+      fileDownloadLink.click();
+      */
+      const fileUrl = window.URL.createObjectURL(new Blob([response.data]));
+      const fileDownloadLink = document.createElement("a");
+      fileDownloadLink.href = fileUrl;
+      fileDownloadLink.setAttribute("target", "_blank");
       document.body.appendChild(fileDownloadLink);
       fileDownloadLink.click();
     } catch (err) {
