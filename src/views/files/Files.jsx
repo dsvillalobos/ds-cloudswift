@@ -47,6 +47,25 @@ function Files() {
       );
 
       const fileUrl = window.URL.createObjectURL(new Blob([response.data]));
+      const newWindow = window.open(fileUrl, "_blank");
+
+      if (newWindow) {
+        newWindow.document.title = file.FileName + "." + file.FileType;
+        newWindow.addEventListener("load", () => {
+          const downloadLink = newWindow.document.createElement("a");
+          downloadLink.href = fileUrl;
+          downloadLink.setAttribute(
+            "download",
+            file.FileName + "." + file.FileType
+          );
+          newWindow.document.body.appendChild(downloadLink);
+          downloadLink.click();
+          newWindow.close();
+        });
+      } else {
+        console.error("Failed to open the new window");
+      }
+      /*
       const fileDownloadLink = document.createElement("a");
       fileDownloadLink.href = fileUrl;
       fileDownloadLink.setAttribute(
@@ -55,6 +74,7 @@ function Files() {
       );
       document.body.appendChild(fileDownloadLink);
       fileDownloadLink.click();
+      */
     } catch (err) {
       console.log(err);
     }

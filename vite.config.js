@@ -90,6 +90,46 @@ export default defineConfig({
           "*.js",
           "*.webmanifest",
         ],
+        runtimeCaching: [
+          {
+            urlPattern:
+              /^https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@5\.3\.3\/dist\/css\/bootstrap\.min\.css/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "bootstrap-css",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+              },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            urlPattern:
+              /^https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@5\.3\.3\/dist\/js\/bootstrap\.bundle\.min\.js/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "bootstrap-js",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+              },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/kit\.fontawesome\.com\/0036ece5c1\.js/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "fontawesome-js",
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+              },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+        ],
       },
     }),
   ],
